@@ -16,15 +16,19 @@ from database import (
     get_evidence_by_share_token, record_verification, get_gap_checklist,
     save_gap_checklist
 )
-from services.hashing import calculate_file_hash, calculate_stream_hash, compare_hashes
-from services.watermarking import embed_watermark, extract_watermark
-from services.qr_service import generate_qr_code_file, get_qr_base64
-from services.evidence_reports import generate_evidence_pdf
-from services.blockchain_service import (
-    check_blockchain_status, get_solidity_source,
-    query_onchain_evidence, query_onchain_hash,
-    verify_tx_receipt_onchain, submit_evidence_backend,
+from hashing import calculate_file_hash, calculate_stream_hash, compare_hashes
+from watermarking import add_watermark, extract_watermark
+from qr_service import generate_qr_code, file_to_qr_base64
+from evidence_reports import generate_evidence_pdf
+from blockchain_service import (
+    check_blockchain_status,
+    get_validity_source,
+    query_onchain_evidence,
+    query_onchain_hash,
+    verify_tx_receipt_onchain,
+    submit_evidence_backend,
     EVIDENCE_REGISTRY_ABI
+)
 )
 
 # Initialize Flask application
