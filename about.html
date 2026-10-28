@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}About Project | IP Evidence Hub{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1 class="page-title">About IP Evidence Hub</h1>
+        <p class="page-subtitle">A Blockchain-Based Platform for Intellectual Property Evidence Management & Proof-of-Existence.</p>
+    </div>
+</div>
+
+<!-- Academic Context Banner -->
+<div class="callout callout-tip" style="display:flex; align-items:center; gap:14px;">
+    <div style="font-size:28px;">🎓</div>
+    <div>
+        <b style="font-size:14px; color:var(--accent-purple);">Savitribai Phule Pune University (SPPU) &bull; First-Year B.Sc. Blockchain Student Project</b>
+        <p style="margin-top:2px; font-size:13px;">
+            Developed for presentation to <b>MST Blockchain</b> as an applied technical demonstration of cryptographic hashing, steganography, and Ethereum smart contract notarization for digital intellectual property protection.
+        </p>
+    </div>
+</div>
+
+<!-- 1. The Core Problem -->
+<div class="card">
+    <div class="card-title">
+        <span>⚠️</span> 1. The Problem: The Fragility of Digital Evidence
+    </div>
+    <p style="font-size:13px; color:#334155; line-height:1.6; margin-bottom:12px;">
+        In today's digital economy, independent creators, UI/UX designers, photographers, developers, and small businesses face a daunting challenge: <b>digital files can be copied, modified, and redistributed in milliseconds without attribution</b>.
+    </p>
+    <p style="font-size:13px; color:#334155; line-height:1.6;">
+        When an intellectual property dispute arises, traditional operating system file creation dates are trivially manipulated, and proving who possessed the original creation first often turns into an expensive, chaotic battle of assertions. Creators rarely maintain organized, time-stamped, tamper-evident records of their preliminary work, native project layers, and drafts.
+    </p>
+</div>
+
+<!-- 2. The Solution -->
+<div class="card">
+    <div class="card-title">
+        <span>💡</span> 2. The Solution: IP Evidence Hub
+    </div>
+    <p style="font-size:13px; color:#334155; line-height:1.6; margin-bottom:16px;">
+        <b>IP Evidence Hub</b> bridges the gap between creative workflows and cryptographic legal preparedness. By providing an intuitive, full-stack management platform, users can:
+    </p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">🔒 Cryptographic Hashing:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Computes mathematically irreversible SHA-256 digital fingerprints of exact original file bytes.</p>
+        </div>
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">🛡️ LSB Invisible Watermarking:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Embeds traceable identifiers into lossless pixel channels to assist in tracing derivative copies.</p>
+        </div>
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">📋 Smart Evidence Gap Checker:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Evaluates supporting documentation (drafts, commits, contracts) across a 7-point audit checklist.</p>
+        </div>
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">📑 Evidence Pack Generator:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Produces professional, court-ready PDF evidence packages via ReportLab with embedded QR verification.</p>
+        </div>
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">🔐 Controlled Share Rooms:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Shares verified proof-of-existence records with clients or lawyers via revocable tokens.</p>
+        </div>
+        <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-blue); font-size:13px;">⛓️ Ethereum Testnet Notarization:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Anchors hashes permanently to a decentralized blockchain smart contract without leaking confidential data.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Blockchain Role -->
+<div class="card">
+    <div class="card-title">
+        <span>⛓️</span> 3. Blockchain's Precise Role: Decentralized Proof-of-Existence
+    </div>
+    <p style="font-size:13px; color:#334155; line-height:1.6; margin-bottom:12px;">
+        A centralized database can theoretically be altered by its administrator. By committing the <b>SHA-256 file hash</b> and <b>Evidence ID</b> to an Ethereum-compatible testnet contract (<code>EvidenceRegistry.sol</code>), the existence of that exact file at that exact block timestamp becomes <b>mathematically unalterable and globally verifiable</b> by any third party without needing to trust our servers.
+    </p>
+    <div class="callout callout-info" style="margin-bottom:0;">
+        <b>Privacy Guarantee:</b> The actual file, images, and creator personal details never leave our secure server. Only the 32-byte cryptographic digest is recorded on-chain.
+    </div>
+</div>
+
+<!-- 4. Potential Business Models -->
+<div class="card">
+    <div class="card-title">
+        <span>💼</span> 4. Potential Business Models (Commercial Viability)
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+        <div style="padding:12px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-navy);">Freemium Creator Tier:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Free monthly vault registrations for students and hobbyists with local database verification.</p>
+        </div>
+        <div style="padding:12px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-navy);">Professional Subscription:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Automated on-chain gas subsidization, bulk PDF generation, and priority watermark scanning for studios.</p>
+        </div>
+        <div style="padding:12px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+            <b style="color:var(--primary-navy);">Enterprise IP Escrow:</b>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">API integration for GitHub repos, Figma plugins, and design agency client handover workflows.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 5. Legal Reality Disclaimer -->
+<div class="callout callout-warning">
+    <b>⚖️ Critical Legal Reality:</b>
+    IP Evidence Hub is an engineering tool for digital evidence gathering and forensic timestamping. Registering a creation in this system establishes technical proof of possession at a specific point in time. It does <b>NOT</b> automatically confer statutory legal copyright ownership, which is established under national legal frameworks (such as the Indian Copyright Act, 1957) and adjudicated in judicial courts.
+</div>
+{% endblock %}

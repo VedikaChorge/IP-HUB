@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Shared Evidence Room | IP Evidence Hub{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Shared Evidence Room (Controlled Access)</h1>
+        <p class="page-subtitle">Share verifiable evidence records with clients, legal counsel, or partners via secure, revocable token links.</p>
+    </div>
+</div>
+
+<div class="callout callout-info">
+    <b>🔐 Security & Privacy Architecture:</b>
+    Shared links use randomly generated, unguessable access tokens. The recipient is presented with a clean, read-only proof page verifying the asset title, creator, SHA-256 fingerprint, and evidence checklist. Raw private files in storage are never exposed directly. You can revoke access at any moment with a single click.
+</div>
+
+<div class="card">
+    <div class="card-title">
+        <span>🔗</span> Manage Evidence Share Links
+    </div>
+
+    {% if records and records|length > 0 %}
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Evidence ID</th>
+                        <th>Creation Title</th>
+                        <th>Creator</th>
+                        <th>Share Status</th>
+                        <th>Shareable Link</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in records %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('evidence_detail', evidence_id=rec.evidence_id) }}" style="font-weight:700; color:var(--primary-blue);">
+                                    {{ rec.evidence_id }}
+                                </a>
+                            </td>
+                            <td><b>{{ rec.title }}</b></td>
+                            <td>{{ rec.creator_name }}</td>
+                            <td>
+                                {% if rec.share_active %}
+                                    <span class="badge" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0;">ACTIVE</span>
+                                {% else %}
+                                    <span class="badge badge-notreg">DISABLED</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if rec.share_active %}
+                                    <div class="hash-pill" style="font-size:11px;">
+                                        <span>/shared/{{ rec.share_token[:16] }}...</span>
+                                        <button class="copy-btn" onclick="copyToClipboard('{{ url_for('view_shared', token=rec.share_token, _external=True) }}', this)" title="Copy Full URL">📋 Copy</button>
+                                    </div>
+                                {% else %}
+                                    <span style="color:#94a3b8; font-size:12px;">Link Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form action="{{ url_for('toggle_share_route', evidence_id=rec.evidence_id) }}" method="POST" style="margin:0;">
+                                    {% if rec.share_active %}
+                                        <input type="hidden" name="action" value="revoke">
+                                        <button type="submit" class="btn btn-danger btn-sm">Revoke Link</button>
+                                        <a href="{{ url_for('view_shared', token=rec.share_token) }}" target="_blank" class="btn btn-secondary btn-sm" style="margin-left:4px;">View Room</a>
+                                    {% else %}
+                                        <input type="hidden" name="action" value="activate">
+                                        <button type="submit" class="btn btn-primary btn-sm">Enable Sharing</button>
+                                    {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div style="text-align:center; padding:36px;">
+            <p style="color:var(--text-muted); font-size:13px;">No evidence records available to share. <a href="{{ url_for('register') }}" style="color:var(--accent-purple);">Register an asset</a> first.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

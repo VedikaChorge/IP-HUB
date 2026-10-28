@@ -1,0 +1,37 @@
+# Python virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Private uploads and generated data (NEVER commit private files to Git)
+data/private_originals/*
+!data/private_originals/.gitkeep
+data/watermarked/*
+!data/watermarked/.gitkeep
+data/reports/*
+!data/reports/.gitkeep
+data/qr_codes/*
+!data/qr_codes/.gitkeep
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Environment secrets and private configuration
+.env
+.env.*
+*.pem
+*.key
+
+# Operating System & IDE metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
