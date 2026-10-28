@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ip-evidence-hub
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: BLOCKCHAIN_RPC_URL
+        value: https://ethereum-sepolia-rpc.publicnode.com
+      - key: CHAIN_ID
+        value: 11155111
+      - key: NETWORK_NAME
+        value: Ethereum Sepolia Testnet
+      - key: EXPLORER_URL
+        value: https://sepolia.etherscan.io
+      # Optional: To persist uploads and SQLite database across restarts,
+      # attach a Render Persistent Disk mounted at /var/data and set:
+      # - key: DATA_DIR
+      #   value: /var/data
