@@ -1,17 +1,14 @@
 import os
 from dotenv import load_dotenv
-
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
 # Load environment variables from .env file if present
 load_dotenv(os.path.join(BASE_DIR, '.env'))
-
 class Config:
     BASE_DIR = BASE_DIR
     SECRET_KEY = os.environ.get('SECRET_KEY', 'ipevidencehub-student-prototype-secret-2026')
     
     # Private storage folders - explicitly outside the static directory
-    DATA_DIR = os.path.join(BASE_DIR, 'data')
+    DATA_DIR = os.environ.get('DATA_DIR', os.path.join(BASE_DIR, 'data'))
     UPLOAD_FOLDER = os.path.join(DATA_DIR, 'private_originals')
     WATERMARK_FOLDER = os.path.join(DATA_DIR, 'watermarked')
     QR_FOLDER = os.path.join(DATA_DIR, 'qr_codes')
