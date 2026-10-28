@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Evidence Pack Generator | IP Evidence Hub{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1 class="page-title">One-Click Evidence Pack Generator</h1>
+        <p class="page-subtitle">Compile cryptographic hashes, timestamps, metadata, gap checklist audits, and QR codes into an official PDF report.</p>
+    </div>
+</div>
+
+<div class="callout callout-info">
+    <b>📑 About Evidence Packs:</b>
+    An Evidence Pack is an organized, printable PDF document designed to present a coherent provenance story. It includes the cryptographic SHA-256 digest calculated at registration, file characteristics, supporting evidence checklist items, and an embedded QR code linking to public verification. It serves as an organizational aid for creators and counsel, not a government-issued copyright certificate.
+</div>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; align-items:start;">
+    <!-- Selector Form -->
+    <div class="card">
+        <div class="card-title">
+            <span>⚙️</span> Select Record to Generate Report
+        </div>
+
+        <form method="GET" action="{{ url_for('evidence_pack') }}">
+            <div class="form-group">
+                <label class="form-label" for="id">Choose Registered Creation:</label>
+                <select name="id" id="id" class="form-control" onchange="this.form.submit()" required>
+                    <option value="">-- Select an Evidence Record --</option>
+                    {% for rec in records %}
+                        <option value="{{ rec.evidence_id }}" {% if selected_record and selected_record.evidence_id == rec.evidence_id %}selected{% endif %}>
+                            {{ rec.evidence_id }} &bull; {{ rec.title }} ({{ rec.creator_name }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+        {% if selected_record %}
+            <div style="margin-top:20px; padding:16px; background:#f8fafc; border-radius:var(--radius-md); border:1px solid #e2e8f0;">
+                <b style="color:var(--primary-navy); font-size:14px; display:block; margin-bottom:8px;">Ready to Compile PDF:</b>
+                <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">
+                    Report will be dynamically generated with ReportLab incorporating the latest timestamp, hashes, and evidence gap scores.
+                </p>
+                <a href="{{ url_for('download_evidence_pack', evidence_id=selected_record.evidence_id) }}" class="btn btn-primary" style="width:100%;">
+                    <span>📥</span> Download Official Evidence Pack (.PDF)
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- What is Included Preview -->
+    <div class="card">
+        <div class="card-title">
+            <span>📋</span> Dossier Contents Overview
+        </div>
+
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:13px;">
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Cryptographic Fingerprint:</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Full 64-character SHA-256 hash of original file bytes.</p>
+                </div>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Registration Timestamp:</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Immutable UTC timestamp recorded upon file submission.</p>
+                </div>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Steganographic Hash (if enabled):</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Distinct hash of the LSB-watermarked derivative file.</p>
+                </div>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Evidence Gap Audit Matrix:</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Completeness percentage and category breakdown.</p>
+                </div>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Embedded Verification QR Code:</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Scannable QR code linking to public verification certificate.</p>
+                </div>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="color:#059669; font-weight:bold;">✓</span>
+                <div>
+                    <b>Forensic & Legal Disclaimer:</b>
+                    <p style="color:var(--text-muted); font-size:12px;">Transparent clarification of scope and legal realities.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
