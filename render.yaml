@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ip-evidence-hub
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: BLOCKCHAIN_RPC_URL
+        value: https://testnetrpc.mstblockchain.com
+      - key: CHAIN_ID
+        value: 91562037
+      - key: NETWORK_NAME
+        value: MST Testnet
+      - key: EXPLORER_URL
+        value: https://testnet.mstscan.com
+      # Optional: To persist uploads and SQLite database across restarts,
+      # attach a Render Persistent Disk mounted at /var/data and set:
+      # - key: DATA_DIR
+      #   value: /var/data
